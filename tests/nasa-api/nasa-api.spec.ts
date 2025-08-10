@@ -56,7 +56,7 @@ test("get with start and end dates", async ({ request }) => {
   expect(dates[0]).toBe(START_DATE);
   expect(dates[1]).toBe(END_DATE);
 });
-test("get data with no parameters", async ({ request }) => {
+test("MMN-004, get data with no parameters", async ({ request }) => {
   const responce = await request.get(`/`);
   expect(responce.status()).toBe(200);
 });

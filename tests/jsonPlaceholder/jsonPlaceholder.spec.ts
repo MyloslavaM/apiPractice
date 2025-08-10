@@ -38,13 +38,13 @@ test(
   "MM-003 update a post with put ",
   { tag: ["@smoke"] },
   async ({ request }) => {
-    const response = await request.put("/posts", {
+    const response = await request.put("/posts/1", {
       data: { title: "foo", body: "bar", userId: 1 },
     });
 
     const body = response.json();
     console.log(response);
-    expect(response.status()).toBe(201);
+    expect(response.status()).toBe(200);
   }
 );
 
@@ -62,9 +62,9 @@ test(
   }
 );
 test("MM-005 delete a post  ", { tag: ["@smoke"] }, async ({ request }) => {
-  const response = await request.delete("/posts");
+  const response = await request.delete("/posts/1");
 
   const body = response.json();
   console.log(response);
-  expect(response.status()).toBe(201);
+  expect(response.status()).toBe(200);
 });
