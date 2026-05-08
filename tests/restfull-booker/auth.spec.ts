@@ -149,5 +149,19 @@ test(`get created bookings, validate schema`, async ({ request }) => {
   const resultGet = await request.get(`/booking/${createdBookingId}`, {
     failOnStatusCode: true,
   });
-  expect(resultGet.status()).toBe(200);
+  const json = await resultGet.json();
+
+  const bookingSchema = Joi.object({
+    firstname: Joi.string().required(),
+    lastname: Joi.string().required(),
+    totalprice: Joi.number().required(),
+    depositpaid: Joi.boolean().required(),
+    bookingdates: Joi.object({
+      checkin: Joi.string().required(),
+      checkout: Joi.string().required(),
+    }),
+    additionalneeds: Joi.string().required(),
+  });
+  const validationResult = bookingSchema.validate(json);
+  expect(validationResult.error).toBeUndefined();
 });
